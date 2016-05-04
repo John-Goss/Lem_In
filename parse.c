@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem_in.h                                           :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/05/03 19:10:23 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/04 18:25:43 by jle-quer         ###   ########.fr       */
+/*   Created: 2016/05/04 18:09:25 by jle-quer          #+#    #+#             */
+/*   Updated: 2016/05/04 18:33:40 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEM_IN_H
-# define LEM_IN_H
+#include "lem_in.h"
 
-# include "./Libft/INCLUDES/libft.h"
-# include <errno.h>
-# include <stdio.h>
-
-void	ft_error(char *str);
-void	ft_parse(char **av);
-int		get_next_line(int const fd, char **line);
-
-#endif
+void	ft_parse(char **av)
+{
+	while (get_next_line(1, av) == 1)
+		ft_printf("%s", "afa");
+	write(1, "\n", 1);
+}

@@ -6,11 +6,16 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/03 19:09:40 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/03 19:10:07 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/05/04 18:25:35 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "lem_in.h"
+
 int main(int ac, char **av)
 {
+	if (ac != 1)
+		ft_error("ERROR");
+	ft_parse(av);
 	return (0);
 }

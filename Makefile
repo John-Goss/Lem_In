@@ -6,7 +6,7 @@
 #    By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/03 19:06:56 by jle-quer          #+#    #+#              #
-#    Updated: 2016/05/03 19:08:57 by jle-quer         ###   ########.fr        #
+#    Updated: 2016/05/04 15:29:57 by jle-quer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,3 +47,7 @@ proper:
 	@make
 	@make clean -C ./Libft/
 	@make clean
+
+fcleanl:
+	@make fclean -C ./Libft/
+	@echo "./Libft/ Is Clean"
