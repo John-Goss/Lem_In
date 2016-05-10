@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/03 19:09:40 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/04 18:25:35 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/05/10 13:17:37 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 int main(int ac, char **av)
 {
 	if (ac != 1)
-		ft_error("ERROR");
+		;
+//		ft_error("ERROR");
 	ft_parse(av);
 	return (0);
 }
