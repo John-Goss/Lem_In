@@ -6,21 +6,37 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 18:09:25 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/10 13:15:37 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/05/10 18:45:55 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-#include <fcntl.h>
 
-void	ft_parse(char **av)
+static int	get_struct(char *line)
 {
-	char	*line;
-	int		fd;
+	t_map	*new;
 
-	(void)av[0];
+	return (new);
+}
+
+void		ft_parse(void)
+{
+	t_map	map;
+	char	*line;
+	int		error;
+
 	line = NULL;
-	fd = open("./test.map", O_RDONLY);
-	while (get_next_line(fd, &line) == 1)
-		ft_printf("%s", line);
+	error = 0;
+	while (get_next_line(0, &line) == 1)
+		if ((map = get_struct(line, &map)) == NULL)
+			error = 1;
+	if (error == 0)
+	{
+		line = NULL;
+		while (get_next_line(0, &line) == 1)
+			ft_putendl(line);
+		ft_putchar('\n');
+	}
+	else if (error == 1)
+		ft_error("ERROR");
 }
