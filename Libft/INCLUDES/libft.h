@@ -100,5 +100,6 @@ int					ft_count_base(unsigned long n, int base);
 long long			ft_atoi_long(const char *str);
 void				ft_lstpushback(t_list **blst, void const *content,
 					size_t content_size);
+int					ft_isint(char *str);
 
 #endif

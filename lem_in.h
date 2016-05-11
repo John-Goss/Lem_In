@@ -24,7 +24,7 @@ typedef struct		s_room
 	int				y;
 	struct s_room	*next;
 	struct s_room	*prev;
-}
+}					t_room;
 
 typedef struct		s_map
 {

@@ -16,6 +16,6 @@ int main(void)
 {
 	t_map	map;
 
-	map = ft_parse(void);
+	map = ft_parse();
 	return (0);
 }

@@ -23,7 +23,7 @@ static void	get_ants(t_map *map)
 			ft_error("ERROR");
 		if (line[0] == '#' && line[1] != '#')
 			continue ;
-		if (is_int(line))
+		if (ft_isint(line))
 		{
 			map->ants = ft_atoi(line);
 			break ;
@@ -37,7 +37,7 @@ t_map		ft_parse(void)
 {
 	t_map	map;
 
-	map = {NULL, NULL, 0};
+	map = (t_map){NULL, NULL, 0};
 	get_ants(&map);
 	return (map);
 }

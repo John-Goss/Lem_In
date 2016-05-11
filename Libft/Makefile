@@ -107,7 +107,8 @@ SRC_NAME =	ft_atoi.c \
 			set_d_norm.c \
 			get_next_line.c \
 			ft_atoi_long.c \
-			ft_lstpushback.c
+			ft_lstpushback.c \
+			ft_isint.c
 
 NAME = libft.a
 
