@@ -12,31 +12,32 @@
 
 #include "lem_in.h"
 
-static int	get_struct(char *line)
+static void	get_ants(t_map *map)
 {
-	t_map	*new;
-
-	return (new);
-}
-
-void		ft_parse(void)
-{
-	t_map	map;
 	char	*line;
-	int		error;
 
 	line = NULL;
-	error = 0;
-	while (get_next_line(0, &line) == 1)
-		if ((map = get_struct(line, &map)) == NULL)
-			error = 1;
-	if (error == 0)
+	while (42)
 	{
-		line = NULL;
-		while (get_next_line(0, &line) == 1)
-			ft_putendl(line);
-		ft_putchar('\n');
+		if (get_next_line(0, &line) != 1)
+			ft_error("ERROR");
+		if (line[0] == '#' && line[1] != '#')
+			continue ;
+		if (is_int(line))
+		{
+			map->ants = ft_atoi(line);
+			break ;
+		}
+		else
+			ft_error("ERROR");
 	}
-	else if (error == 1)
-		ft_error("ERROR");
+}
+
+t_map		ft_parse(void)
+{
+	t_map	map;
+
+	map = {NULL, NULL, 0};
+	get_ants(&map);
+	return (map);
 }

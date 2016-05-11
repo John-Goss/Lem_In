@@ -12,11 +12,10 @@
 
 #include "lem_in.h"
 
-int main(int ac, char **av)
+int main(void)
 {
-	(void)av;
-	if (ac != 1)
-		ft_error("ERROR");
-	ft_parse();
+	t_map	map;
+
+	map = ft_parse(void);
 	return (0);
 }

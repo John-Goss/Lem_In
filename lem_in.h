@@ -13,12 +13,27 @@
 #ifndef LEM_IN_H
 # define LEM_IN_H
 
-# include "./Libft/INCLUDES/libft.h"
+# include "libft.h"
 # include <errno.h>
-# include <stdio.h>
+
+typedef struct		s_room
+{
+	int				ant;
+	char			*name;
+	int				x;
+	int				y;
+	struct s_room	*next;
+	struct s_room	*prev;
+}
+
+typedef struct		s_map
+{
+	t_room			*start;
+	t_room			*end;
+	int				ants;
+}					t_map;
 
 void	ft_error(char *str);
-void	ft_parse();
-int		get_next_line(int const fd, char **line);
+t_map	ft_parse(void);
 
 #endif
