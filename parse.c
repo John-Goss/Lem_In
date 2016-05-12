@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 18:09:25 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/12 17:01:37 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/05/12 20:39:52 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,23 +36,30 @@ static void	get_ants(t_map *map)
 	}
 }
 
-static char	*is_room(t_map *map, char *line)
+static int	is_room(t_map *map, char *line)
 {
-	t_room	new;
+	t_room		new;
+	static int	start_end[2] = {0, 0};
 
 	new = (t_room){0, NULL, 0, 0, 0, NULL, NULL};
-	(map->start && ft_strcmp(line, "##start"))
-		|| (map->end && ft_strcmp(line, "##end")) == 0 ? ft_error("ERROR") : 0;
+	(start_end[0] == 1 && ft_strcmp(line, "##start") == 0) ||
+		(start_end[1] == 1 && ft_strcmp(line, "##end") == 0) ? ft_error("ERROR") : 0;
 	if (ft_strcmp(line, "##start") == 0)
 	{
+		start_end[0] = 1;
 		get_next_line(0, &line);
-		line = is_start(&new, map, line);
+		is_start_end(&new, map, line, 0);
 	}
-//	else if (ft_strcmp(line, "##end") == 0)
-//		line = is_end(&new, map, get_next_line(0, &line));
-//	else
+	else if (ft_strcmp(line, "##end") == 0)
+	{
+		start_end[1] = 1;
+		get_next_line(0, &line);
+		is_start_end(&new, map, line, 1);
+	}
+	else
+		return (0);
 //		parse_room(&new, map, line);
-	return (line);
+	return (1);
 }
 
 static void	get_rooms(t_map *map)
@@ -66,7 +73,7 @@ static void	get_rooms(t_map *map)
 	{
 		if (line[0] == '#' && line[1] != '#')
 			continue ;
-		if ((line = is_room(map, line)))
+		if (is_room(map, line) == 1)
 			continue ;
 		else
 			ft_error("ERROR");

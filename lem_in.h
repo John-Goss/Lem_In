@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/03 19:10:23 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/12 13:33:44 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/05/12 20:39:48 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ typedef struct		s_map
 
 void	ft_error(char *str);
 t_map	ft_parse(void);
-char	*is_start(t_room *room, t_map *map,char *line);
+void	is_start_end(t_room *room, t_map *map, char *line, int type);
 
 #endif
