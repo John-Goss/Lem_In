@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 12:53:28 by jle-quer          #+#    #+#             */
-/*   Updated: 2015/11/30 11:29:09 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/05/12 17:11:31 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	ft_putendl_fd(char const *s, int fd)
 {
+	if (!s)
+		return ;
 	ft_putstr_fd((char *)s, fd);
 	ft_putchar_fd('\n', fd);
 }

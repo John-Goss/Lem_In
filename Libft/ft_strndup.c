@@ -1,20 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/27 12:53:03 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/12 17:11:14 by jle-quer         ###   ########.fr       */
+/*   Created: 2016/05/12 16:52:42 by jle-quer          #+#    #+#             */
+/*   Updated: 2016/05/12 17:07:27 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(char const *s, int fd)
+char	*ft_strndup(const char *s1, size_t length)
 {
-	if (!s)
-		return ;
-	write(fd, s, ft_strlen(s));
+	size_t	i;
+	char	*new;
+
+	i = 0;
+	if (!s1 || length == 0)
+		return (NULL);
+	if (!(new = (char *)malloc(sizeof(char) * length + 1)))
+		return (NULL);
+	while (s1[i] && i < length)
+	{
+		new[i] = s1[i];
+		i++;
+	}
+	if (!s1[i] && i < length)
+		ft_bzero(new + i, (length - i));
+	new[length] = '\0';
+	return (new);
 }

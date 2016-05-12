@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 18:09:25 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/12 13:41:19 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/05/12 17:01:37 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ static void	get_rooms(t_map *map)
 	line = NULL;
 	while (get_next_line(0, &line) == 1)
 	{
-		if (map->ants && i++ == 0)
-			continue ;
 		if (line[0] == '#' && line[1] != '#')
 			continue ;
 		if ((line = is_room(map, line)))
