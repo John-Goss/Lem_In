@@ -6,11 +6,12 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 18:09:25 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/10 18:45:55 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/05/12 11:24:51 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+#include <get_next_line.h>
 
 static void	get_ants(t_map *map)
 {
