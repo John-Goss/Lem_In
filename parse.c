@@ -6,14 +6,32 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 18:09:25 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/12 20:39:52 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/05/15 19:26:06 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include <get_next_line.h>
 
-static void	get_ants(t_map *map)
+static t_room	*init_room(void)
+{
+	t_room	*new;
+
+	new = NULL;
+	if (!(new = (t_room *)malloc(sizeof(t_room))))
+		return (NULL);
+	new->ant = 0;
+	new->name = NULL;
+	new->x = 0;
+	new->y = 0;
+	new->to_end = 0;
+	new->top = NULL;
+	new->next = NULL;
+	new->prev = NULL;
+	return (new);
+}
+
+static void		get_ants(t_map *map)
 {
 	char	*line;
 
@@ -36,36 +54,36 @@ static void	get_ants(t_map *map)
 	}
 }
 
-static int	is_room(t_map *map, char *line)
+static int		is_room(t_map *map, char *line)
 {
-	t_room		new;
+	t_room		*new;
 	static int	start_end[2] = {0, 0};
 
-	new = (t_room){0, NULL, 0, 0, 0, NULL, NULL};
+	new = init_room();
 	(start_end[0] == 1 && ft_strcmp(line, "##start") == 0) ||
 		(start_end[1] == 1 && ft_strcmp(line, "##end") == 0) ? ft_error("ERROR") : 0;
 	if (ft_strcmp(line, "##start") == 0)
 	{
 		start_end[0] = 1;
 		get_next_line(0, &line);
-		is_start_end(&new, map, line, 0);
+		parse_room(new, map, line, 0);
 	}
-	else if (ft_strcmp(line, "##end") == 0)
+	if (ft_strcmp(line, "##end") == 0)
 	{
 		start_end[1] = 1;
 		get_next_line(0, &line);
-		is_start_end(&new, map, line, 1);
+		parse_room(new, map, line, 1);
 	}
 	else
-		return (0);
-//		parse_room(&new, map, line);
+		parse_room(new, map, line, 42);
+	g_first = 1;
 	return (1);
 }
 
 static void	get_rooms(t_map *map)
 {
-	char	*line;
-	int		i;
+	char		*line;
+	int			i;
 
 	i = 0;
 	line = NULL;
@@ -80,12 +98,9 @@ static void	get_rooms(t_map *map)
 	}
 }
 
-t_map		ft_parse(void)
+void		ft_parse(t_map *map)
 {
-	t_map	map;
-
-	map = (t_map){NULL, NULL, 0, 0};
-	get_ants(&map);
-	get_rooms(&map);
-	return (map);
+	init_map(map);
+	get_ants(map);
+	get_rooms(map);
 }
