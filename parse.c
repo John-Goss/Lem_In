@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 18:09:25 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/15 19:26:06 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/05/16 16:30:03 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,8 @@ static t_room	*init_room(void)
 	new->x = 0;
 	new->y = 0;
 	new->to_end = 0;
-	new->top = NULL;
+	new->neighbor = NULL;
 	new->next = NULL;
-	new->prev = NULL;
 	return (new);
 }
 
@@ -52,13 +51,16 @@ static void		get_ants(t_map *map)
 		else
 			ft_error("ERROR");
 	}
+	free(line);
 }
 
 static int		is_room(t_map *map, char *line)
 {
 	t_room		*new;
+	int			i;
 	static int	start_end[2] = {0, 0};
 
+	i = 0;
 	new = init_room();
 	(start_end[0] == 1 && ft_strcmp(line, "##start") == 0) ||
 		(start_end[1] == 1 && ft_strcmp(line, "##end") == 0) ? ft_error("ERROR") : 0;
@@ -66,21 +68,20 @@ static int		is_room(t_map *map, char *line)
 	{
 		start_end[0] = 1;
 		get_next_line(0, &line);
-		parse_room(new, map, line, 0);
+		i = parse_room(new, map, line, 0);
 	}
-	if (ft_strcmp(line, "##end") == 0)
+	else if (ft_strcmp(line, "##end") == 0)
 	{
 		start_end[1] = 1;
 		get_next_line(0, &line);
-		parse_room(new, map, line, 1);
+		i = parse_room(new, map, line, 1);
 	}
 	else
-		parse_room(new, map, line, 42);
-	g_first = 1;
-	return (1);
+		i = parse_room(new, map, line, 42);
+	return i == 0 ? (0) : (1);
 }
 
-static void	get_rooms(t_map *map)
+static int		get_rooms(t_map *map)
 {
 	char		*line;
 	int			i;
@@ -89,13 +90,20 @@ static void	get_rooms(t_map *map)
 	line = NULL;
 	while (get_next_line(0, &line) == 1)
 	{
+		if (i == 0 && is_room(map, line) == 1)
+			continue ;
 		if (line[0] == '#' && line[1] != '#')
 			continue ;
-		if (is_room(map, line) == 1)
+		if (get_room_link(map, line) == 1)
+		{
+			i = 1;
 			continue ;
+		}
 		else
 			ft_error("ERROR");
 	}
+	free(line);
+	return (1);
 }
 
 void		ft_parse(t_map *map)

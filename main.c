@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/03 19:09:40 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/15 19:26:08 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/05/16 18:29:19 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,20 @@ int main(void)
 	int		i = 0;
 
 	ft_parse(&map);
-	ptr = map.start;
+	ptr = map.top;
 	while (ptr)
 	{
 		if (!i)
-			ft_printf("Nom Map Start : %s\nCoord X : %d, Coord Y : %d\n\n", map.start->name, map.start->x, map.start->y);
+			ft_printf("Nom Map Start : %s\n\n", map.start->name);
 		else
-			ft_printf("Nom Room : %s\nCoord X : %d, Coord Y : %d\n\n", ptr->name, ptr->x, ptr->y);
+		{
+			ft_printf("Nom Room : %s\n", ptr->name);
+			ptr = ptr->next;
+		}
 		i = 1;
-		ptr = ptr->next;
 	}
-	ft_printf("Nom Map End : %s\nCoord X : %d, Coord Y : %d\n", map.end->name, map.end->x, map.end->y);
+	ft_printf("\nNom Map End : %s\n", map.end->name);
+	ft_printf("\nNbr Voisin Room %s : %d -> Name is : %s\n", map.top->name, map.top->neighbor->nbr_neigh, map.top->neighbor->name);
+	ft_printf("\nNbr Voisin Room %s", map.start->neighbor->name);
 	return (0);
 }
