@@ -64,7 +64,7 @@ static void	set_room_link(t_room *top, t_neighbors *voisin, char **array)
 		tmp = tmp->next;
 	if (ft_strcmp(cur->name, array[0]) == 0 && ft_strcmp(tmp->name, array[1]) == 0)
 	{
-		if (voisin->nbr_neigh > 0)
+		if (cur->neighbor)
 			voisin->next = cur->neighbor;
 		voisin->name = ft_strdup(array[1]);
 		voisin->nbr_neigh++;
