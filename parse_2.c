@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 12:47:35 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/16 18:29:16 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/05/17 12:55:51 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,23 @@
 static int	check_exist_room(char *first, char *last, t_room *top)
 {
 	int	i;
+	int	j;
 
 	i = 0;
+	j = 0;
+	if (ft_strcmp(first, last) == 0)
+		ft_error("ERROR");
 	while (top)
 	{
 		if (ft_strcmp(first, top->name) == 0)
 			i++;
 		if (ft_strcmp(last, top->name) == 0)
-			i++;
-		if (i == 2)
+			j++;
+		if (i == 1 && j == 1)
 			return (1);
 		top = top->next;
 	}
+	ft_error("ERROR");
 	return (0);
 }
 
@@ -50,26 +55,29 @@ static void	chained_list_set(t_room *room, t_map *map)
 	}
 }
 
-static void	set_room_link(t_room *top, t_neighbors *voisin, char **array)
+static void	set_room_link(t_room *top, char **array)
 {
-	t_room	*cur;
-	t_room	*tmp;
+	t_room		*cur;
+	t_room		*tmp;
+	t_neighbors	*new;
 
 	tmp = top;
 	cur = top;
-	voisin = init_neighbors();
-	while (ft_strcmp(cur->name, array[0]) != 0 || !cur)
+	new = init_neighbors();
+	while (ft_strcmp(cur->name, array[0]) != 0 && cur)
 		cur = cur->next;
-	while (ft_strcmp(tmp->name, array[1]) != 0 || !tmp)
+	while (ft_strcmp(tmp->name, array[1]) != 0 && tmp)
 		tmp = tmp->next;
 	if (ft_strcmp(cur->name, array[0]) == 0 && ft_strcmp(tmp->name, array[1]) == 0)
 	{
 		if (cur->neighbor)
-			voisin->next = cur->neighbor;
-		voisin->name = ft_strdup(array[1]);
-		voisin->nbr_neigh++;
-		cur->neighbor = voisin;
+			new->next = cur->neighbor;
+		new->name = ft_strdup(array[1]);
+		cur->nbr_neigh++;
+		cur->neighbor = new;
 	}
+	else
+		ft_error("ERROR");
 }
 
 int			parse_room(t_room *room, t_map *map, char *line, int type)
@@ -101,17 +109,15 @@ int			parse_room(t_room *room, t_map *map, char *line, int type)
 
 int			get_room_link(t_map *map, char *line)
 {
-	t_neighbors	*new;
 	int			i;
 	char		**array;
 
 	i = 0;
-	new = NULL;
 	array = ft_strsplit(line, '-');
 	while (array[i])
 		i++;
 	if (i != 2 || !check_exist_room(array[0], array[1], map->top))
 		return (0);
-	set_room_link(map->top, new, array);
+	set_room_link(map->top, array);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/16 16:16:04 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/16 18:05:05 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/05/17 12:20:26 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ t_neighbors	*init_neighbors(void)
 {
 	t_neighbors	*new;
 
+	new = NULL;
 	if (!(new = (t_neighbors *)malloc(sizeof(t_neighbors))))
 		return (NULL);
-	new->nbr_neigh = 0;
 	new->name = NULL;
 	new->next = NULL;
 	return (new);

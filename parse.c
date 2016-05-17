@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 18:09:25 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/16 16:30:03 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/05/17 12:56:06 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static t_room	*init_room(void)
 	new->x = 0;
 	new->y = 0;
 	new->to_end = 0;
+	new->nbr_neigh = 0;
 	new->neighbor = NULL;
 	new->next = NULL;
 	return (new);
@@ -90,6 +91,9 @@ static int		get_rooms(t_map *map)
 	line = NULL;
 	while (get_next_line(0, &line) == 1)
 	{
+		if (ft_strcmp(line, "##start") != 0 && ft_strcmp(line, "##end") != 0 && 
+				line[0] == '#' && line[1] == '#')
+			continue ;
 		if (i == 0 && is_room(map, line) == 1)
 			continue ;
 		if (line[0] == '#' && line[1] != '#')
@@ -100,7 +104,7 @@ static int		get_rooms(t_map *map)
 			continue ;
 		}
 		else
-			ft_error("ERROR");
+			break ;
 	}
 	free(line);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/03 19:10:23 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/16 18:03:04 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/05/17 12:20:56 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 
 typedef struct			s_neighbors
 {
-	int					nbr_neigh;
 	char				*name;
 	struct s_neighbors	*next;
 }						t_neighbors;
@@ -30,6 +29,7 @@ typedef struct		s_room
 	int				x;
 	int				y;
 	int				to_end;
+	int				nbr_neigh;
 	t_neighbors		*neighbor;
 	struct s_room	*next;
 }					t_room;
