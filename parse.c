@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 18:09:25 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/17 12:56:06 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/05/17 13:17:38 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ static int		is_room(t_map *map, char *line)
 
 	i = 0;
 	new = init_room();
-	(start_end[0] == 1 && ft_strcmp(line, "##start") == 0) ||
-		(start_end[1] == 1 && ft_strcmp(line, "##end") == 0) ? ft_error("ERROR") : 0;
+	(start_end[0] == 1 && ft_strcmp(line, "##start") == 0) || (start_end[1] == 1
+			&& ft_strcmp(line, "##end") == 0) ? ft_error("ERROR") : 0;
 	if (ft_strcmp(line, "##start") == 0)
 	{
 		start_end[0] = 1;
@@ -79,10 +79,12 @@ static int		is_room(t_map *map, char *line)
 	}
 	else
 		i = parse_room(new, map, line, 42);
-	return i == 0 ? (0) : (1);
+	if (i == 0)
+		return (0);
+	return (1);
 }
 
-static int		get_rooms(t_map *map)
+static void		get_rooms(t_map *map)
 {
 	char		*line;
 	int			i;
@@ -91,7 +93,7 @@ static int		get_rooms(t_map *map)
 	line = NULL;
 	while (get_next_line(0, &line) == 1)
 	{
-		if (ft_strcmp(line, "##start") != 0 && ft_strcmp(line, "##end") != 0 && 
+		if (ft_strcmp(line, "##start") != 0 && ft_strcmp(line, "##end") != 0 &&
 				line[0] == '#' && line[1] == '#')
 			continue ;
 		if (i == 0 && is_room(map, line) == 1)
@@ -103,14 +105,12 @@ static int		get_rooms(t_map *map)
 			i = 1;
 			continue ;
 		}
-		else
-			break ;
+		break ;
 	}
 	free(line);
-	return (1);
 }
 
-void		ft_parse(t_map *map)
+void			ft_parse(t_map *map)
 {
 	init_map(map);
 	get_ants(map);

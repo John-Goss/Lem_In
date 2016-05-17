@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 12:47:35 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/17 12:55:51 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/05/17 13:19:15 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ static void	set_room_link(t_room *top, char **array)
 		cur = cur->next;
 	while (ft_strcmp(tmp->name, array[1]) != 0 && tmp)
 		tmp = tmp->next;
-	if (ft_strcmp(cur->name, array[0]) == 0 && ft_strcmp(tmp->name, array[1]) == 0)
+	if (ft_strcmp(cur->name, array[0]) == 0 &&
+			ft_strcmp(tmp->name, array[1]) == 0)
 	{
 		if (cur->neighbor)
 			new->next = cur->neighbor;
