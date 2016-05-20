@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/03 19:10:23 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/17 14:58:20 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/05/20 15:08:22 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ void		free_array(char **array);
 int			get_room_link(t_map *map, char *line);
 t_neighbors	*init_neighbors(void);
 int			check_acquisition(t_map *map);
+void		check_double_and_pos(t_room *room, t_room *begin);
 
 #endif

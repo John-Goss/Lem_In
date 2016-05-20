@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 12:47:35 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/17 13:19:15 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/05/20 15:15:13 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static void	chained_list_set(t_room *room, t_map *map)
 		ptr->next = room;
 		room->next = NULL;
 	}
+	check_double_and_pos(room, map->top);
 }
 
 static void	set_room_link(t_room *top, char **array)
