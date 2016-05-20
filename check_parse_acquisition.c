@@ -6,11 +6,14 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/17 13:06:17 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/17 13:10:08 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/05/17 14:59:09 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "lem_in.h"
+
 int	check_acquisition(t_map *map)
 {
-	;
+	(void)map;
+	return (1);
 }

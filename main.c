@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/03 19:09:40 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/17 13:18:33 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/05/17 14:56:54 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,18 @@ int	main(void)
 	t_map	map;
 
 	ft_parse(&map);
-	if (!check_acquisition(&map))
-		ft_error("ERROR");
+//	if (!check_acquisition(&map))
+//		ft_error("ERROR");
+	while (map.top)
+	{
+		ft_printf("Nom Room : %s -- ", map.top->name);
+		while (map.top->neighbor)
+		{
+			ft_printf("Nom Voisins : %s", map.top->neighbor->name);
+			map.top->neighbor = map.top->neighbor->next;
+		}
+		map.top = map.top->next;
+		ft_putchar('\n');
+	}
 	return (0);
 }
