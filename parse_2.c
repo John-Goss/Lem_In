@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 12:47:35 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/20 15:15:13 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/05/23 14:23:42 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ static void	set_room_link(t_room *top, char **array)
 	if (ft_strcmp(cur->name, array[0]) == 0 &&
 			ft_strcmp(tmp->name, array[1]) == 0)
 	{
+		if (SET OTHER ROOM TO 2ND NEIGHBOR)
+			;
 		if (cur->neighbor)
 			new->next = cur->neighbor;
 		new->name = ft_strdup(array[1]);
