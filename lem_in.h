@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/03 19:10:23 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/23 13:43:28 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/05/24 16:05:10 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,19 @@ typedef struct		s_map
 
 void		ft_error(char *str);
 void		ft_parse(t_map *map);
-int			parse_room(t_room *room, t_map *map, char *line, int type);
 void		init_map(t_map *map);
 void		free_array(char **array);
 int			get_room_link(t_map *map, char *line);
-t_neighbors	*init_neighbors(void);
+
+
+
+int			init_neighbors(t_neighbors *new);
+
+
 int			check_acquisition(t_map *map);
+int			check_neighbors(t_room *room, char *name);
 void		check_double_and_pos(t_room *room, t_room *begin);
+void		chained_list_set(t_room *room, t_map *map);
+t_room		*init_room(void);
 
 #endif

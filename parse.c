@@ -6,30 +6,12 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 18:09:25 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/17 13:20:51 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/05/24 10:57:28 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include <get_next_line.h>
-
-static t_room	*init_room(void)
-{
-	t_room	*new;
-
-	new = NULL;
-	if (!(new = (t_room *)malloc(sizeof(t_room))))
-		return (NULL);
-	new->ant = 0;
-	new->name = NULL;
-	new->x = 0;
-	new->y = 0;
-	new->to_end = 0;
-	new->nbr_neigh = 0;
-	new->neighbor = NULL;
-	new->next = NULL;
-	return (new);
-}
 
 static void		get_ants(t_map *map)
 {
@@ -53,6 +35,33 @@ static void		get_ants(t_map *map)
 			ft_error("ERROR");
 	}
 	free(line);
+}
+
+static int		parse_room(t_room *room, t_map *map, char *line, int type)
+{
+	char	**array;
+	int		i;
+
+	i = 0;
+	array = ft_strsplit(line, ' ');
+	while (array[i])
+		i++;
+	if (i != 3 || !ft_isint(array[1]) || !ft_isint(array[2]))
+		return (0);
+	room->name = ft_strdup(array[0]);
+	room->x = ft_atoi(array[1]);
+	room->y = ft_atoi(array[2]);
+	map->rooms++;
+	if (type == 0)
+	{
+		room->ant = map->ants;
+		map->start = &(*room);
+	}
+	else if (type == 1)
+		map->end = room;
+	chained_list_set(room, map);
+	free_array(array);
+	return (1);
 }
 
 static int		is_room(t_map *map, char *line)

@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 12:47:35 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/23 14:23:42 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/05/24 17:24:44 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,54 @@ static int	check_exist_room(char *first, char *last, t_room *top)
 	return (0);
 }
 
-static void	chained_list_set(t_room *room, t_map *map)
+static void	set_2nd_room_neighbor(t_room *top, char **array)
+{
+	t_neighbors	*new;
+
+	new = NULL;
+	while (ft_strcmp(top->name, array[1]) != 0 && top)
+		top = top->next;
+	if (!check_neighbors(top, array[0]))
+		return ;
+	init_neighbors(new);
+	if (top->neighbor)
+		new->next = top->neighbor;
+	top->neighbor = new;
+	new->name = ft_strdup(array[0]);
+	top->nbr_neigh++;
+}
+
+static void	set_room_link(t_room *top, char **array)
+{
+	t_room		*first;
+	t_room		*second;
+	t_neighbors	*new;
+
+	first = top;
+	second = top;
+	new = NULL;
+	while (ft_strcmp(first->name, array[0]) != 0 && first)
+		first = first->next;
+	while (ft_strcmp(second->name, array[1]) != 0 && second)
+		second = second->next;
+	if (!check_neighbors(first, array[1]))
+		return ;
+	if (ft_strcmp(first->name, array[0]) == 0 &&
+			ft_strcmp(second->name, array[1]) == 0)
+	{
+		init_neighbors(new);
+		if (first->neighbor)
+			new->next = first->neighbor;
+		new->name = ft_strdup(array[1]);
+		first->nbr_neigh++;
+		first->neighbor = new;
+		set_2nd_room_neighbor(top, array);
+	}
+	else
+		ft_error("ERROR");
+}
+
+void		chained_list_set(t_room *room, t_map *map)
 {
 	t_room	*ptr;
 
@@ -54,61 +101,6 @@ static void	chained_list_set(t_room *room, t_map *map)
 		room->next = NULL;
 	}
 	check_double_and_pos(room, map->top);
-}
-
-static void	set_room_link(t_room *top, char **array)
-{
-	t_room		*cur;
-	t_room		*tmp;
-	t_neighbors	*new;
-
-	tmp = top;
-	cur = top;
-	new = init_neighbors();
-	while (ft_strcmp(cur->name, array[0]) != 0 && cur)
-		cur = cur->next;
-	while (ft_strcmp(tmp->name, array[1]) != 0 && tmp)
-		tmp = tmp->next;
-	if (ft_strcmp(cur->name, array[0]) == 0 &&
-			ft_strcmp(tmp->name, array[1]) == 0)
-	{
-		if (SET OTHER ROOM TO 2ND NEIGHBOR)
-			;
-		if (cur->neighbor)
-			new->next = cur->neighbor;
-		new->name = ft_strdup(array[1]);
-		cur->nbr_neigh++;
-		cur->neighbor = new;
-	}
-	else
-		ft_error("ERROR");
-}
-
-int			parse_room(t_room *room, t_map *map, char *line, int type)
-{
-	char	**array;
-	int		i;
-
-	i = 0;
-	array = ft_strsplit(line, ' ');
-	while (array[i])
-		i++;
-	if (i != 3 || !ft_isint(array[1]) || !ft_isint(array[2]))
-		return (0);
-	room->name = ft_strdup(array[0]);
-	room->x = ft_atoi(array[1]);
-	room->y = ft_atoi(array[2]);
-	map->rooms++;
-	if (type == 0)
-	{
-		room->ant = map->ants;
-		map->start = &(*room);
-	}
-	else if (type == 1)
-		map->end = room;
-	chained_list_set(room, map);
-	free_array(array);
-	return (1);
 }
 
 int			get_room_link(t_map *map, char *line)
