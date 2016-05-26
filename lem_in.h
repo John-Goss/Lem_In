@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/03 19:10:23 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/24 16:05:10 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/05/26 11:37:03 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int			get_room_link(t_map *map, char *line);
 
 
 
-int			init_neighbors(t_neighbors *new);
+t_neighbors	*init_neighbors(char *name);
 
 
 int			check_acquisition(t_map *map);

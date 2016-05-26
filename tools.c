@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/16 16:16:04 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/24 16:04:42 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/05/26 12:56:41 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,15 @@ t_room		*init_room(void)
 	return (new);
 }
 
-int			init_neighbors(t_neighbors *new)
+t_neighbors		*init_neighbors(char *name)
 {
-	new = NULL;
+	t_neighbors	*new;
+
 	if (!(new = (t_neighbors *)malloc(sizeof(t_neighbors))))
-		return (-1);
-	new->name = NULL;
+		return (NULL);
+	new->name = ft_strdup(name);
 	new->next = NULL;
-	return (1);
+	return (new);
 }
 
 void		free_array(char **array)
