@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/03 19:10:23 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/26 11:37:03 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/05/26 14:29:59 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void		ft_error(char *str);
 void		ft_parse(t_map *map);
 void		init_map(t_map *map);
 void		free_array(char **array);
-int			get_room_link(t_map *map, char *line);
+int			get_room_link(t_map **map, char *line);
 
 
 
@@ -57,7 +57,7 @@ t_neighbors	*init_neighbors(char *name);
 int			check_acquisition(t_map *map);
 int			check_neighbors(t_room *room, char *name);
 void		check_double_and_pos(t_room *room, t_room *begin);
-void		chained_list_set(t_room *room, t_map *map);
+void		chained_list_set(t_room **room, t_map **map);
 t_room		*init_room(void);
 
 #endif

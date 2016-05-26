@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 12:47:35 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/26 13:01:39 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/05/26 14:30:25 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,28 +84,28 @@ static void	set_room_link(t_room **top, char **array)
 		ft_error("ERROR");
 }
 
-void		chained_list_set(t_room *room, t_map *map)
+void		chained_list_set(t_room **room, t_map **map)
 {
 	t_room	*ptr;
 
 	ptr = NULL;
-	if (map->rooms == 1)
+	if ((*map)->rooms == 1)
 	{
-		room->next = NULL;
-		map->top = room;
+		(*room)->next = NULL;
+		(*map)->top = *room;
 	}
 	else
 	{
-		ptr = map->top;
+		ptr = (*map)->top;
 		while (ptr->next)
 			ptr = ptr->next;
-		ptr->next = room;
-		room->next = NULL;
+		ptr->next = *room;
+		(*room)->next = NULL;
 	}
-	check_double_and_pos(room, map->top);
+	check_double_and_pos(*room, (*map)->top);
 }
 
-int			get_room_link(t_map *map, char *line)
+int			get_room_link(t_map **map, char *line)
 {
 	int			i;
 	char		**array;
@@ -114,8 +114,8 @@ int			get_room_link(t_map *map, char *line)
 	array = ft_strsplit(line, '-');
 	while (array[i])
 		i++;
-	if (i != 2 || !check_exist_room(array[0], array[1], map->top))
+	if (i != 2 || !check_exist_room(array[0], array[1], (*map)->top))
 		return (0);
-	set_room_link(&map->top, array);
+	set_room_link(&(*map)->top, array);
 	return (1);
 }

@@ -6,14 +6,14 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 18:09:25 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/24 10:57:28 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/05/26 14:31:11 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include <get_next_line.h>
 
-static void		get_ants(t_map *map)
+static void		get_ants(t_map **map)
 {
 	char	*line;
 
@@ -26,8 +26,8 @@ static void		get_ants(t_map *map)
 			continue ;
 		if (ft_isint(line))
 		{
-			map->ants = ft_atoi(line);
-			if (map->ants == 0)
+			(*map)->ants = ft_atoi(line);
+			if ((*map)->ants == 0)
 				ft_error("ERROR - NO ANTS");
 			break ;
 		}
@@ -37,7 +37,7 @@ static void		get_ants(t_map *map)
 	free(line);
 }
 
-static int		parse_room(t_room *room, t_map *map, char *line, int type)
+static int		parse_room(t_room **room, t_map **map, char *line, int type)
 {
 	char	**array;
 	int		i;
@@ -48,23 +48,23 @@ static int		parse_room(t_room *room, t_map *map, char *line, int type)
 		i++;
 	if (i != 3 || !ft_isint(array[1]) || !ft_isint(array[2]))
 		return (0);
-	room->name = ft_strdup(array[0]);
-	room->x = ft_atoi(array[1]);
-	room->y = ft_atoi(array[2]);
-	map->rooms++;
+	(*room)->name = ft_strdup(array[0]);
+	(*room)->x = ft_atoi(array[1]);
+	(*room)->y = ft_atoi(array[2]);
+	(*map)->rooms++;
 	if (type == 0)
 	{
-		room->ant = map->ants;
-		map->start = &(*room);
+		(*room)->ant = (*map)->ants;
+		(*map)->start = *room;
 	}
 	else if (type == 1)
-		map->end = room;
+		(*map)->end = *room;
 	chained_list_set(room, map);
 	free_array(array);
 	return (1);
 }
 
-static int		is_room(t_map *map, char *line)
+static int		is_room(t_map **map, char *line)
 {
 	t_room		*new;
 	int			i;
@@ -78,22 +78,22 @@ static int		is_room(t_map *map, char *line)
 	{
 		start_end[0] = 1;
 		get_next_line(0, &line);
-		i = parse_room(new, map, line, 0);
+		i = parse_room(&new, map, line, 0);
 	}
 	else if (ft_strcmp(line, "##end") == 0)
 	{
 		start_end[1] = 1;
 		get_next_line(0, &line);
-		i = parse_room(new, map, line, 1);
+		i = parse_room(&new, map, line, 1);
 	}
 	else
-		i = parse_room(new, map, line, 42);
+		i = parse_room(&new, map, line, 42);
 	if (i == 0)
 		return (0);
 	return (1);
 }
 
-static void		get_rooms(t_map *map)
+static void		get_rooms(t_map **map)
 {
 	char		*line;
 	int			i;
@@ -121,7 +121,7 @@ static void		get_rooms(t_map *map)
 
 void			ft_parse(t_map *map)
 {
-	init_map(map);
-	get_ants(map);
-	get_rooms(map);
+	init_map(&map);
+	get_ants(&map);
+	get_rooms(&map);
 }
