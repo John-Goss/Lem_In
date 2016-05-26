@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 18:09:25 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/26 14:31:11 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/05/26 18:15:33 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,9 +119,8 @@ static void		get_rooms(t_map **map)
 	free(line);
 }
 
-void			ft_parse(t_map *map)
+void			ft_parse(t_map **map)
 {
-	init_map(&map);
-	get_ants(&map);
-	get_rooms(&map);
+	get_ants(map);
+	get_rooms(map);
 }

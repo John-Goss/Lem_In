@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 12:47:35 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/26 14:30:25 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/05/26 18:15:28 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,15 @@ static int	check_exist_room(char *first, char *last, t_room *top)
 static void	set_2nd_room_neighbor(t_room *top, char **array)
 {
 	t_neighbors	*new;
+	t_room		*tmp;
 
+	tmp = top;
 	new = NULL;
 	while (ft_strcmp(top->name, array[1]) != 0 && top)
 		top = top->next;
 	if (!check_neighbors(top, array[0]))
 		return ;
-	init_neighbors(new);
+	new = init_neighbors(array[0]);
 	if (top->neighbor)
 		new->next = top->neighbor;
 	top->neighbor = new;
@@ -59,25 +61,40 @@ static void	set_room_link(t_room **top, char **array)
 	t_room		*first;
 	t_room		*second;
 	t_neighbors	*new;
-	t_neighbors	*tmp;
+	t_neighbors	*ptr;
 
 	first = *top;
 	second = *top;
+	ptr = NULL;
 	while (ft_strcmp(first->name, array[0]) != 0 && first)
 		first = first->next;
 	while (ft_strcmp(second->name, array[1]) != 0 && second)
 		second = second->next;
 	if (!check_neighbors(first, array[1]))
 		return ;
-	tmp = first->neighbor;
 	if (ft_strcmp(first->name, array[0]) == 0 &&
 			ft_strcmp(second->name, array[1]) == 0)
 	{
 		new = init_neighbors(array[1]);
-		if (tmp)
-			new->next = tmp;
-		first->nbr_neigh++;
-		first->neighbor = new;
+		if (!first->neighbor)
+		{
+			ptr = new;
+			ptr->next = NULL;
+			first->neighbor = ptr;
+			first->nbr_neigh++;
+		}
+		else
+		{
+			ptr = first->neighbor;
+			while (ptr)
+				ptr = ptr->next;
+			ptr->next = new;
+			first->nbr_neigh++;
+		}
+//		if (first->neighbor)
+//			new->next = first->neighbor;
+//		first->nbr_neigh++;
+//		first->neighbor = new;
 //		set_2nd_room_neighbor(top, array);
 	}
 	else

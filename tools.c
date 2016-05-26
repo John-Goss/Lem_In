@@ -6,19 +6,24 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/16 16:16:04 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/26 12:56:41 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/05/26 17:21:21 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void		init_map(t_map *map)
+t_map		*init_map(void)
 {
-	map->start = NULL;
-	map->end = NULL;
-	map->top = NULL;
-	map->ants = 0;
-	map->rooms = 0;
+	t_map	*new;
+
+	if (!(new = (t_map *)malloc(sizeof(t_map))))
+		return (NULL);
+	new->start = NULL;
+	new->end = NULL;
+	new->top = NULL;
+	new->ants = 0;
+	new->rooms = 0;
+	return (new);
 }
 
 t_room		*init_room(void)
