@@ -44,17 +44,6 @@ t_room		*init_room(void)
 	return (new);
 }
 
-t_neighbors		*init_neighbors(char *name)
-{
-	t_neighbors	*new;
-
-	if (!(new = (t_neighbors *)malloc(sizeof(t_neighbors))))
-		return (NULL);
-	new->name = ft_strdup(name);
-	new->next = NULL;
-	return (new);
-}
-
 void		free_array(char **array)
 {
 	int	i;
@@ -71,14 +60,14 @@ void		free_array(char **array)
 
 int			check_neighbors(t_room *room, char *name)
 {
-	t_room	*ptr;
+	t_list	*ptr;
 
-	ptr = room;
-	while (ptr->neighbor)
+	ptr = room->neighbor;
+	while (ptr)
 	{
-		if (ft_strcmp(ptr->neighbor->name, name) == 0)
+		if (ft_strcmp(ptr->content, name) == 0)
 			return (0);
-		ptr->neighbor = ptr->neighbor->next;
+		ptr = ptr->next;
 	}
 	return (1);
 }

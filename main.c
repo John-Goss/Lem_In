@@ -27,7 +27,7 @@ int	main(void)
 		ft_printf("Nom Room : %s -- Nombre Voisins : %d\n", map->top->name, map->top->nbr_neigh);
 		while (map->top->neighbor)
 		{
-			ft_printf("ROOM : %s ", map->top->neighbor->name);
+			ft_printf("ROOM : %s ", map->top->neighbor->content);
 			map->top->neighbor = map->top->neighbor->next;
 		}
 		ft_putchar('\n');

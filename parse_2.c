@@ -36,36 +36,37 @@ static int	check_exist_room(char *first, char *last, t_room *top)
 	ft_error("ERROR");
 	return (0);
 }
-/*
-static void	set_2nd_room_neighbor(t_room *top, char **array)
-{
-	t_neighbors	*new;
-	t_room		*tmp;
 
-	tmp = top;
+static void	set_2nd_room_neighbor(t_room **top, char **array)
+{
+	t_list	*new;
+	t_room	*tmp;
+
+	tmp = *top;
 	new = NULL;
-	while (ft_strcmp(top->name, array[1]) != 0 && top)
-		top = top->next;
-	if (!check_neighbors(top, array[0]))
+	while (ft_strcmp(tmp->name, array[1]) != 0 && tmp)
+		tmp = tmp->next;
+	if (!check_neighbors(tmp, array[0]))
 		return ;
-	new = init_neighbors(array[0]);
-	if (top->neighbor)
-		new->next = top->neighbor;
-	top->neighbor = new;
-	new->name = ft_strdup(array[0]);
-	top->nbr_neigh++;
+	if (tmp->neighbor)
+		ft_lstpushback(&(tmp->neighbor), array[0], sizeof(array[0]));
+	else
+	{
+		new = ft_lstnew(array[0], sizeof(array[0]));
+		tmp->neighbor = new;
+	}
+	tmp->nbr_neigh++;
 }
-*/
+
 static void	set_room_link(t_room **top, char **array)
 {
 	t_room		*first;
 	t_room		*second;
-	t_neighbors	*new;
-	t_neighbors	*ptr;
+	t_list		*new;
 
 	first = *top;
 	second = *top;
-	ptr = NULL;
+	new = NULL;
 	while (ft_strcmp(first->name, array[0]) != 0 && first)
 		first = first->next;
 	while (ft_strcmp(second->name, array[1]) != 0 && second)
@@ -75,27 +76,15 @@ static void	set_room_link(t_room **top, char **array)
 	if (ft_strcmp(first->name, array[0]) == 0 &&
 			ft_strcmp(second->name, array[1]) == 0)
 	{
-		new = init_neighbors(array[1]);
-		if (!first->neighbor)
-		{
-			ptr = new;
-			ptr->next = NULL;
-			first->neighbor = ptr;
-			first->nbr_neigh++;
-		}
+		if (first->neighbor)
+			ft_lstpushback(&(first->neighbor), array[1], sizeof(array[1]));
 		else
 		{
-			ptr = first->neighbor;
-			while (ptr)
-				ptr = ptr->next;
-			ptr->next = new;
-			first->nbr_neigh++;
+			new = ft_lstnew(array[1], sizeof(array[1]));
+			first->neighbor = new;
 		}
-//		if (first->neighbor)
-//			new->next = first->neighbor;
-//		first->nbr_neigh++;
-//		first->neighbor = new;
-//		set_2nd_room_neighbor(top, array);
+		first->nbr_neigh++;
+		set_2nd_room_neighbor(top, array);
 	}
 	else
 		ft_error("ERROR");
