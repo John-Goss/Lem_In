@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/16 16:16:04 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/26 17:21:21 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/05/31 12:59:44 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_map		*init_map(void)
 	new->start = NULL;
 	new->end = NULL;
 	new->top = NULL;
+	new->tab = NULL;
 	new->ants = 0;
 	new->rooms = 0;
 	return (new);
@@ -41,6 +42,19 @@ t_room		*init_room(void)
 	new->nbr_neigh = 0;
 	new->neighbor = NULL;
 	new->next = NULL;
+	return (new);
+}
+
+t_tab		*init_tab(char *name, int left)
+{
+	t_tab	*new;
+
+	new = NULL;
+	if (!(new = (t_tab *)malloc(sizeof(t_tab))))
+		return (NULL);
+	new->name = ft_strdup(name);
+	new->left = left;
+	new->passed = 0;
 	return (new);
 }
 

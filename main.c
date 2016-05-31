@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/03 19:09:40 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/26 17:21:57 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/05/31 12:59:15 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,31 @@ int	main(void)
 	map = NULL;
 	map = init_map();
 	ft_parse(&map);
-//	if (!check_acquisition(&map))
-//		ft_error("ERROR");
-	ft_printf("Addrs 2 : [%p]\n", map->top);
-	while (map->top)
+	if (!find_path(&map))
+		ft_error("ERROR");
+
+	
+	t_room	*tmp;
+	tmp = map->top;
+	while (tmp)
 	{
-		ft_printf("Nom Room : %s -- Nombre Voisins : %d\n", map->top->name, map->top->nbr_neigh);
-		while (map->top->neighbor)
+		ft_printf("Nom Room : %s -- Nombre Voisins : %d\n", tmp->name, tmp->nbr_neigh);
+		while (tmp->neighbor)
 		{
-			ft_printf("ROOM : %s ", map->top->neighbor->content);
-			map->top->neighbor = map->top->neighbor->next;
+			ft_printf("ROOM : %s ", tmp->neighbor->content);
+			tmp->neighbor = tmp->neighbor->next;
 		}
 		ft_putchar('\n');
-		map->top = map->top->next;
+		tmp = tmp->next;
 		ft_putchar('\n');
+	}
+	ft_putstr("\n\n------\n\n");
+	t_list	*ptr;
+	ptr = map->tab;
+	while (ptr)
+	{
+		ft_printf("Nom Tab : %s -- Left : %d -- Passed : %d\n", ((t_tab *)ptr->content)->name, ((t_tab *)ptr->content)->left, ((t_tab *)ptr->content)->passed);
+		ptr = ptr->next;
 	}
 	return (0);
 }
