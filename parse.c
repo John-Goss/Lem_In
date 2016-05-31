@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 18:09:25 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/26 18:15:33 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/05/31 15:49:02 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ static void		get_ants(t_map **map)
 	{
 		if (get_next_line(0, &line) != 1)
 			ft_error("ERROR");
+		if (ft_strcmp(line, "##start") != 0 && ft_strcmp(line, "##end") != 0 &&
+				line[0] == '#' && line[1] == '#')
+			continue ;
 		if (line[0] == '#' && line[1] != '#')
 			continue ;
 		if (ft_isint(line))

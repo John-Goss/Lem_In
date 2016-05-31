@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/03 19:09:40 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/31 12:59:15 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/05/31 15:07:38 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ int	main(void)
 	if (!find_path(&map))
 		ft_error("ERROR");
 
-	
+
+
+
+/*
 	t_room	*tmp;
 	tmp = map->top;
 	while (tmp)
@@ -39,11 +42,18 @@ int	main(void)
 	}
 	ft_putstr("\n\n------\n\n");
 	t_list	*ptr;
+	t_list	*a;
 	ptr = map->tab;
+	a = map->node;
 	while (ptr)
 	{
 		ft_printf("Nom Tab : %s -- Left : %d -- Passed : %d\n", ((t_tab *)ptr->content)->name, ((t_tab *)ptr->content)->left, ((t_tab *)ptr->content)->passed);
 		ptr = ptr->next;
 	}
-	return (0);
+	while (a)
+	{
+		ft_printf("\nNom Node : %s -- Left : %s", ((t_node *)a->content)->name, ((t_node *)a->content)->prev);
+		a = a->next;
+	}
+*/	return (0);
 }
