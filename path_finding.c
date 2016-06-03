@@ -6,15 +6,16 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 14:34:05 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/06/02 19:24:21 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/06/03 14:01:15 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static t_list	*find_neighbor(t_list *room, t_room *top)
+static t_list	*find_neighbor(t_list *room, t_room *top, t_list *tab)
 {
 	t_list	*ret;
+	t_list	*tmp;
 	t_room	*ptr;
 
 	ret = NULL;
@@ -22,10 +23,19 @@ static t_list	*find_neighbor(t_list *room, t_room *top)
 	while (ptr)
 	{
 		if (ft_strcmp(ptr->name, ((t_tab *)room->content)->name) == 0)
-			ret = ptr->neighbor;
+		{
+			tmp = tab;
+			while (ft_strcmp(ptr->name, ((t_tab *)tmp->content)->name) != 0)
+				tmp = tmp->next;
+			if (ft_strcmp(ptr->name, ((t_tab *)tmp->content)->name) == 0 && ((t_tab *)tmp->content)->passed == 0)
+			{
+				ret = ptr->neighbor;
+				return (ret);
+			}
+		}
 		ptr = ptr->next;
 	}
-	return (ret);
+	return (NULL);
 }
 
 static t_list	*find_start(t_list *tab)
@@ -83,8 +93,12 @@ static int		set_tab_neighbor(char *name, int left, t_list *tab)
 	{
 		if (ft_strcmp(name, ((t_tab *)ptr->content)->name) == 0)
 		{
-			((t_tab *)ptr->content)->left = left;
-			return (1);
+			if (((t_tab *)ptr->content)->left > left
+				|| ((t_tab *)ptr->content)->left == -1)
+			{
+				((t_tab *)ptr->content)->left = left;
+				return (1);
+			}
 		}
 		ptr = ptr->next;
 	}
@@ -100,17 +114,21 @@ int				path_finding(t_map **map)
 	tab_start = find_start((*map)->tab);
 	while (tab_start)
 	{
-		if (!(neighbor = find_neighbor(tab_start, (*map)->top)))
+		if (!(neighbor = find_neighbor(tab_start, (*map)->top, (*map)->tab)))
 			return (0);
 		((t_tab *)tab_start->content)->passed = 1;
 		while (neighbor)
 		{
 //			meme nom que voisin dans tab = left = tab_start value + 1;
-			if (!(set_tab_neighbor((char *)neighbor->content, ((int)((t_tab *)tab_start->content)->left) + 1, (*map)->tab)))
-				return (0);
+			if (!(set_tab_neighbor((char *)neighbor->content,
+				((int)((t_tab *)tab_start->content)->left) + 1, (*map)->tab)))
+				//return (0);
+				;
 //			meme nom que voisim dans node = prev = tab_start name;
-			if (!(set_node_prev((char *)neighbor->content, ((char *)((t_tab *)tab_start->content)->name), (*map)->node)))
-				return (0);
+			if (!(set_node_prev((char *)neighbor->content,
+				((char *)((t_tab *)tab_start->content)->name), (*map)->node)))
+				//return (0);
+				;
 			neighbor = neighbor->next;
 		}
 		ft_printf("%s\n", ((t_tab *)tab_start->content)->name);
