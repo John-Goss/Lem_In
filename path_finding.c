@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 14:34:05 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/06/03 14:01:15 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/06/03 16:22:03 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,9 @@ static int		set_node_prev(char *prev, char *name, t_list *node)
 	ptr = node;
 	while (ptr)
 	{
-		if (ft_strcmp(name, ((t_node *)ptr->content)->name) == 0)
+		if (ft_strcmp(prev, ((t_node *)ptr->content)->name) == 0)
 		{
-			((t_node *)ptr->content)->prev = ft_strdup(prev);
+			((t_node *)ptr->content)->prev = ft_strdup(name);
 			return (1);
 		}
 		ptr = ptr->next;
@@ -123,15 +123,14 @@ int				path_finding(t_map **map)
 			if (!(set_tab_neighbor((char *)neighbor->content,
 				((int)((t_tab *)tab_start->content)->left) + 1, (*map)->tab)))
 				//return (0);
-				;
+				break ;
 //			meme nom que voisim dans node = prev = tab_start name;
 			if (!(set_node_prev((char *)neighbor->content,
 				((char *)((t_tab *)tab_start->content)->name), (*map)->node)))
 				//return (0);
-				;
+				break ;
 			neighbor = neighbor->next;
 		}
-		ft_printf("%s\n", ((t_tab *)tab_start->content)->name);
 		tab_start = find_start((*map)->tab);
 	}
 	return (1);
