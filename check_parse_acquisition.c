@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/17 13:06:17 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/31 15:51:28 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/06/06 21:15:09 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ int			find_path(t_map **map)
 	node = NULL;
 	set_tab(&tab, map);
 	set_node(&node, map);
-	if (!path_finding(map))
+	path_finding(map);
+	if (!check_path(map))
 		return (0);
 	return (1);
 }

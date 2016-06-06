@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/16 16:16:04 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/31 14:13:19 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/06/06 19:34:45 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_map		*init_map(void)
 	new->top = NULL;
 	new->tab = NULL;
 	new->node = NULL;
+	new->path = NULL;
 	new->ants = 0;
 	new->rooms = 0;
 	return (new);
