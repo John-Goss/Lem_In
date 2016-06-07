@@ -6,13 +6,13 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/07 14:44:57 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/06/07 17:58:35 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/06/07 20:09:22 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-static int		nbr_room_path(t_map *map)
+/*
+static int	nbr_room_path(t_map *map)
 {
 	int		i;
 	t_list	*tmp;
@@ -26,28 +26,39 @@ static int		nbr_room_path(t_map *map)
 	}
 	return (i);
 }
-
-void			set_moves(t_map **map)
+*/
+static void	set_rooms_neighbors(t_map *map)
 {
-	t_room	*dest;
-	size_t	index_room;
-	size_t	nbr;
+	t_room	*ptr;
+	t_room	*neigh;
+	t_list	*lst;
 
-	dest = NULL;
-	nbr = nbr_room_path(*map);
-	index_room = nbr;
-	while ((*map)->path)
+	ptr = map->start;
+	lst = map->path;
+	while (lst->next)
 	{
-		ft_printf("%s ", (*map)->path->content);
-		(*map)->path = (*map)->path->next;
+		neigh = map->top;
+		while (ft_strcmp(neigh->name, lst->next->content) != 0)
+			neigh = neigh->next;
+		ptr->next = neigh;
+		ptr = ptr->next;
+		lst = lst->next;
 	}
-	while (map->ants > 0)
-	{
-		dest = map->start;
-		if (!(dest = find_room_move(map, index_room)))
-			break ;
-		if (dest->ant > 0)
-			;
-		ft_printf("L%d-%s ", dest->ant, dest->name);
-	}
+}
+
+static void	moves_ope(t_room *room)
+{
+	if (room->next->ant == 0)
+		return ;
+	if (end || room vide)
+		avance
+	else
+		recursive sur room->next
+}
+
+void		set_moves(t_map **map)
+{
+	set_rooms_neighbors((*map));
+	(*map)->start->ant = (*map)->ants;
+	moves_ope((*map)->start);
 }

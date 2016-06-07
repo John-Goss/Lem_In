@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 18:09:25 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/06/07 14:38:11 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/06/07 20:08:02 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static void		get_ants(t_map **map)
 		if (ft_isint(line))
 		{
 			(*map)->ants = ft_atoi(line);
-			if ((*map)->ants == 0)
-				ft_error("ERROR - NO ANTS");
+			if ((*map)->ants <= 0)
+				ft_error("ERROR - NUMBER OF ANTS");
 			break ;
 		}
 		else
