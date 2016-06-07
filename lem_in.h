@@ -39,6 +39,7 @@ typedef struct		s_room
 	int				nbr_neigh;
 	t_list			*neighbor;
 	struct s_room	*next;
+	struct s_room	*prev;
 }					t_room;
 
 typedef struct		s_map

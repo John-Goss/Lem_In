@@ -45,6 +45,7 @@ t_room		*init_room(void)
 	new->nbr_neigh = 0;
 	new->neighbor = NULL;
 	new->next = NULL;
+	new->prev = NULL;
 	return (new);
 }
 

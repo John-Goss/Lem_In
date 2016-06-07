@@ -11,54 +11,61 @@
 /* ************************************************************************** */
 
 #include "lem_in.h"
-/*
-static int	nbr_room_path(t_map *map)
-{
-	int		i;
-	t_list	*tmp;
 
-	i = 0;
-	tmp = map->path;
-	while (tmp)
-	{
-		i++;
-		tmp = tmp->next;
-	}
-	return (i);
-}
-*/
-static void	set_rooms_neighbors(t_map *map)
+static void	set_rooms_neighbors(t_map **map)
 {
 	t_room	*ptr;
 	t_room	*neigh;
 	t_list	*lst;
 
-	ptr = map->start;
-	lst = map->path;
+	ptr = (*map)->start;
+	lst = (*map)->path;
 	while (lst->next)
 	{
-		neigh = map->top;
+		neigh = (*map)->top;
 		while (ft_strcmp(neigh->name, lst->next->content) != 0)
 			neigh = neigh->next;
 		ptr->next = neigh;
+		neigh->prev = ptr;
 		ptr = ptr->next;
 		lst = lst->next;
 	}
 }
 
-static void	moves_ope(t_room *room)
+static void	moves_ope(t_map **map)
 {
-	if (room->next->ant == 0)
-		return ;
-	if (end || room vide)
-		avance
-	else
-		recursive sur room->next
+	t_room	*ptr;
+	t_room	*prev;
+
+	ptr = (*map)->end;
+	while (ptr->prev)
+	{
+		prev = ptr->prev;
+		if ((ptr == (*map)->end || ptr->ant == 0) && prev->ant > 0)
+		{
+			ft_printf("L%d-%s ", prev->ant, ptr->name);
+			ptr->ant = prev->ant;
+			prev->ant = 0;
+		}
+		ptr = ptr->prev;
+	}
 }
 
 void		set_moves(t_map **map)
 {
-	set_rooms_neighbors((*map));
+	int	nbr;
+
+	nbr = 1;
+	set_rooms_neighbors(map);
 	(*map)->start->ant = (*map)->ants;
-	moves_ope((*map)->start);
+	while ((*map)->end->ant != (*map)->ants)
+	{
+		if (nbr <= (*map)->ants)
+			(*map)->start->ant = nbr;
+		moves_ope(map);
+		if ((*map)->end->ant != (*map)->ants)
+			ft_putchar('\n');
+		nbr++;
+	}
+	ft_putchar('\n');
 }
