@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstpushfront.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/05/03 19:09:40 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/06/07 16:52:34 by jle-quer         ###   ########.fr       */
+/*   Created: 2016/06/07 17:46:46 by jle-quer          #+#    #+#             */
+/*   Updated: 2016/06/07 17:46:48 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "libft.h"
 
-int	main(void)
+void	ft_lstpushfront(t_list **blst, void const *content, size_t content_size)
 {
-	t_map	*map;
+	t_list	*list;
 
-	map = NULL;
-	map = init_map();
-	ft_parse(&map);
-	if (!map->start || !map->end || !map->start->neighbor ||
-			!map->end->neighbor || !find_path(&map))
-		ft_error("ERROR");
-	display_map(map->line);
-	set_moves(&map);
-	return (0);
+	list = *blst;
+	if (list)
+	{
+		list = ft_lstnew(content, content_size);
+		list->next = *blst;
+		*blst = list;
+	}
+	else
+		*blst = ft_lstnew(content, content_size);
 }

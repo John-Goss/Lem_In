@@ -6,7 +6,7 @@
 #    By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/03 14:39:27 by jle-quer          #+#    #+#              #
-#    Updated: 2016/05/12 17:00:42 by jle-quer         ###   ########.fr        #
+#    Updated: 2016/06/07 17:48:23 by jle-quer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -108,6 +108,7 @@ SRC_NAME =	ft_atoi.c \
 			get_next_line.c \
 			ft_atoi_long.c \
 			ft_lstpushback.c \
+			ft_lstpushfront.c \
 			ft_isint.c \
 			ft_strndup.c
 

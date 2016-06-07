@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 13:10:56 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/06/07 13:09:33 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/06/07 14:45:50 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,14 @@ void	get_line(t_map **map, char *line)
 	char	*tmp;
 
 	list = NULL;
+	if (*line == '\n' || *line == '\0' || *line == '\t')
+		return ;
 	tmp = ft_strdup(line);
 	if ((*map)->line != NULL)
-		ft_lstpushback(&(*map)->line, tmp, ft_strlen(tmp));
+		ft_lstpushback(&(*map)->line, tmp, ft_strlen(tmp) + 1);
 	else
 	{
-		list = ft_lstnew(tmp, ft_strlen(tmp));
+		list = ft_lstnew(tmp, ft_strlen(tmp) + 1);
 		(*map)->line = list;
 	}
 }
@@ -47,4 +49,5 @@ void	display_map(t_list *line)
 		ft_printf("%s\n", line->content);
 		line = line->next;
 	}
+	ft_putchar('\n');
 }

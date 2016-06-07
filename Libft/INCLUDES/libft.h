@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/30 11:37:11 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/12 17:01:25 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/06/07 17:47:47 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ int					ft_printf(const char *format, ...);
 int					ft_count_base(unsigned long n, int base);
 long long			ft_atoi_long(const char *str);
 void				ft_lstpushback(t_list **blst, void const *content,
+					size_t content_size);
+void				ft_lstpushfront(t_list **blst, void const *content,
 					size_t content_size);
 int					ft_isint(char *str);
 char				*ft_strndup(const char *s1, size_t length);

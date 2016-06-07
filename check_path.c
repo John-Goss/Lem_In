@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 17:07:54 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/06/06 21:15:27 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/06/07 17:45:28 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@ static void	parse_path(t_map **map)
 			while (ft_strcmp(((t_node *)node->content)->name, (*map)->end->name)
 					!= 0)
 				node = node->next;
-			ft_lstpushback(&path, (*map)->end->name, sizeof((*map)->end->name));
+			ft_lstpushfront(&path, (*map)->end->name, sizeof((*map)->end->name));
 			i = 0;
 		}
 		else
 		{
 			while (ft_strcmp(((t_node *)node->content)->name, ptr) != 0)
 				node = node->next;
-			ft_lstpushback(&path, ptr, sizeof(ptr));
+			ft_lstpushfront(&path, ptr, sizeof(ptr));
 		}
 		if (((t_node *)node->content)->prev == NULL)
 			break ;
@@ -71,10 +71,12 @@ int			check_path(t_map **map)
 
 	parse_path(map);
 	tmp = (*map)->path;
+	if (!tmp)
+		return (0);
 	while (tmp->next)
 		tmp = tmp->next;
-	if (ft_strcmp((*map)->path->content, (*map)->end->name) != 0 ||
-			ft_strcmp(tmp->content, (*map)->start->name) != 0)
+	if (ft_strcmp((*map)->path->content, (*map)->start->name) != 0 ||
+			ft_strcmp(tmp->content, (*map)->end->name) != 0)
 		return (0);
 	return (1);
 }
