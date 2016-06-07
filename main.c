@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/03 19:09:40 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/06/06 21:25:39 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/06/07 11:58:55 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@ int	main(void)
 	ft_parse(&map);
 	if (!find_path(&map) || !map->start->neighbor || !map->end->neighbor)
 		ft_error("ERROR");
+	display_map(map->line);
 	return (0);
 }

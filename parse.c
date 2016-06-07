@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 18:09:25 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/31 15:49:02 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/06/07 13:09:36 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static void		get_ants(t_map **map)
 	{
 		if (get_next_line(0, &line) != 1)
 			ft_error("ERROR");
+		get_line(map, line);
 		if (ft_strcmp(line, "##start") != 0 && ft_strcmp(line, "##end") != 0 &&
 				line[0] == '#' && line[1] == '#')
 			continue ;
@@ -81,12 +82,14 @@ static int		is_room(t_map **map, char *line)
 	{
 		start_end[0] = 1;
 		get_next_line(0, &line);
+		get_line(map, line);
 		i = parse_room(&new, map, line, 0);
 	}
 	else if (ft_strcmp(line, "##end") == 0)
 	{
 		start_end[1] = 1;
 		get_next_line(0, &line);
+		get_line(map, line);
 		i = parse_room(&new, map, line, 1);
 	}
 	else
@@ -105,6 +108,7 @@ static void		get_rooms(t_map **map)
 	line = NULL;
 	while (get_next_line(0, &line) == 1)
 	{
+		get_line(map, line);
 		if (ft_strcmp(line, "##start") != 0 && ft_strcmp(line, "##end") != 0 &&
 				line[0] == '#' && line[1] == '#')
 			continue ;

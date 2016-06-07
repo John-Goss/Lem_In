@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 14:34:05 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/06/06 21:16:22 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/06/07 11:36:44 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ static t_list	*find_start(t_list *tab)
 	int		nbr;
 	int		passed;
 
-	ret = NULL;
 	ptr = tab;
+	ret = NULL;
 	nbr = 0;
 	while (ptr)
 	{
