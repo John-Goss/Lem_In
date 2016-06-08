@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 13:10:56 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/06/07 14:45:50 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/06/08 18:43:47 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,31 @@ t_node	*init_node(char *name)
 	new->name = ft_strdup(name);
 	new->prev = NULL;
 	return (new);
+}
+
+t_final	*init_final(char *name)
+{
+	t_final	*new;
+
+	new = NULL;
+	if (!(new = (t_final *)malloc(sizeof(t_final))))
+		return (NULL);
+	new->name = ft_strdup(name);
+	new->ant = 0;
+	return (new);
+}
+
+void	del_last_line(t_list *line)
+{
+	t_list	*tmp;
+
+	tmp = line;
+	while (tmp->next->next)
+	{
+		tmp = tmp->next;
+	}
+	free(tmp->next);
+	tmp->next = NULL;
 }
 
 void	get_line(t_map **map, char *line)

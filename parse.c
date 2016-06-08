@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 18:09:25 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/06/07 20:08:02 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/06/08 18:46:11 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,16 +78,14 @@ static int		is_room(t_map **map, char *line)
 	new = init_room();
 	(start_end[0] == 1 && ft_strcmp(line, "##start") == 0) || (start_end[1] == 1
 			&& ft_strcmp(line, "##end") == 0) ? ft_error("ERROR") : 0;
-	if (ft_strcmp(line, "##start") == 0)
+	if (ft_strcmp(line, "##start") == 0 && (start_end[0] = 1))
 	{
-		start_end[0] = 1;
 		get_next_line(0, &line);
 		get_line(map, line);
 		i = parse_room(&new, map, line, 0);
 	}
-	else if (ft_strcmp(line, "##end") == 0)
+	else if (ft_strcmp(line, "##end") == 0 && (start_end[1] = 1))
 	{
-		start_end[1] = 1;
 		get_next_line(0, &line);
 		get_line(map, line);
 		i = parse_room(&new, map, line, 1);
@@ -121,6 +119,7 @@ static void		get_rooms(t_map **map)
 			i = 1;
 			continue ;
 		}
+		del_last_line((*map)->line);
 		break ;
 	}
 	free(line);

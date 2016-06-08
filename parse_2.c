@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 12:47:35 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/31 11:40:50 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/06/08 18:48:49 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static int	check_exist_room(char *first, char *last, t_room *top)
 {
 	t_room	*ptr;
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
 	i = 0;
 	j = 0;

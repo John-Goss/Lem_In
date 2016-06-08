@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 17:07:54 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/06/07 17:45:28 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/06/08 18:19:01 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,10 @@
 static int	nbr_of_node(t_list *node)
 {
 	t_list	*tmp;
-
-	int	i;
-	tmp = node;
+	int		i;
 
 	i = 0;
+	tmp = node;
 	while (tmp)
 	{
 		i++;

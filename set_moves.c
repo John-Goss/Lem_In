@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/07 14:44:57 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/06/07 20:09:22 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/06/08 17:50:20 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,40 +14,43 @@
 
 static void	set_rooms_neighbors(t_map **map)
 {
-	t_room	*ptr;
-	t_room	*neigh;
-	t_list	*lst;
+	t_list	*list;
+	t_list	*m_path;
 
-	ptr = (*map)->start;
-	lst = (*map)->path;
-	while (lst->next)
+	list = NULL;
+	m_path = (*map)->path;
+	while (m_path)
 	{
-		neigh = (*map)->top;
-		while (ft_strcmp(neigh->name, lst->next->content) != 0)
-			neigh = neigh->next;
-		ptr->next = neigh;
-		neigh->prev = ptr;
-		ptr = ptr->next;
-		lst = lst->next;
+		ft_lstpushfront(&list, init_final(m_path->content), sizeof(t_final));
+		m_path = m_path->next;
 	}
+	free((*map)->path);
+	(*map)->path = list;
+	(*map)->path_end = list;
+	m_path = (*map)->path;
+	while (m_path->next)
+		m_path = m_path->next;
+	(*map)->path_start = m_path;
 }
 
 static void	moves_ope(t_map **map)
 {
-	t_room	*ptr;
-	t_room	*prev;
+	t_list	*ptr;
+	t_list	*prev;
 
-	ptr = (*map)->end;
-	while (ptr->prev)
+	ptr = (*map)->path;
+	while (ptr->next)
 	{
-		prev = ptr->prev;
-		if ((ptr == (*map)->end || ptr->ant == 0) && prev->ant > 0)
+		prev = ptr->next;
+		if ((ptr == (*map)->path_end || ((t_final *)ptr->content)->ant == 0) &&
+				((t_final *)prev->content)->ant > 0)
 		{
-			ft_printf("L%d-%s ", prev->ant, ptr->name);
-			ptr->ant = prev->ant;
-			prev->ant = 0;
+			ft_printf("L%d-%s ", ((t_final *)prev->content)->ant,
+					((t_final *)ptr->content)->name);
+			((t_final *)ptr->content)->ant = ((t_final *)prev->content)->ant;
+			((t_final *)prev->content)->ant = 0;
 		}
-		ptr = ptr->prev;
+		ptr = ptr->next;
 	}
 }
 
@@ -57,13 +60,13 @@ void		set_moves(t_map **map)
 
 	nbr = 1;
 	set_rooms_neighbors(map);
-	(*map)->start->ant = (*map)->ants;
-	while ((*map)->end->ant != (*map)->ants)
+	((t_final *)(*map)->path_start->content)->ant = (*map)->ants;
+	while (((t_final *)(*map)->path_end->content)->ant != (*map)->ants)
 	{
 		if (nbr <= (*map)->ants)
-			(*map)->start->ant = nbr;
+			((t_final *)(*map)->path_start->content)->ant = nbr;
 		moves_ope(map);
-		if ((*map)->end->ant != (*map)->ants)
+		if (((t_final *)(*map)->path_end->content)->ant != (*map)->ants)
 			ft_putchar('\n');
 		nbr++;
 	}
