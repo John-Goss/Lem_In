@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 18:09:25 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/06/08 18:46:11 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/06/09 14:40:31 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ static int		parse_room(t_room **room, t_map **map, char *line, int type)
 	array = ft_strsplit(line, ' ');
 	while (array[i])
 		i++;
-	if (i != 3 || !ft_isint(array[1]) || !ft_isint(array[2]))
+	if (i != 3 || !ft_isint(array[1]) || !ft_isint(array[2])
+			|| array[0][0] == 'L')
 		return (0);
 	(*room)->name = ft_strdup(array[0]);
 	(*room)->x = ft_atoi(array[1]);

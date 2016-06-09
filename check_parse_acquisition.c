@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/17 13:06:17 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/06/07 16:47:09 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/06/09 14:41:29 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void		check_double_and_pos(t_room *room, t_room *begin)
 		if (ft_strcmp(room->name, ptr->name) == 0)
 			ft_error("ERROR - DOUBLE ROOM NAME");
 		if (room->x == ptr->x && room->y == ptr->y)
-			ft_error("ERROR - SAME POSITION BETWEEN TWO ROOMS");
+			ft_error("ERROR - SAME POSITION (X-Y) BETWEEN TWO ROOMS");
 		ptr = ptr->next;
 	}
 }

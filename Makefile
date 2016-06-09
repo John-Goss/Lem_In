@@ -6,11 +6,21 @@
 #    By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/03 19:06:56 by jle-quer          #+#    #+#              #
-#    Updated: 2016/05/04 15:29:57 by jle-quer         ###   ########.fr        #
+#    Updated: 2016/06/09 14:43:12 by jle-quer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC_NAME =
+SRC_NAME =	main.c \
+			error.c \
+			check_parse_acquisition.c \
+			check_path.c \
+			parse.c \
+			parse_2.c \
+			path_finding.c \
+			set_moves.c \
+			tools.c \
+			tools_2.c \
+			tools_3.c
 
 NAME = lem-in
 
