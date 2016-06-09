@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/03 19:10:23 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/06/08 18:43:12 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/06/09 13:12:40 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int					get_room_link(t_map **map, char *line);
 int					find_path(t_map **map);
 int					path_finding(t_map **map);
 int					check_neighbors(t_room *room, char *name);
+int					end_passed(char *end_name, t_list *tab);
 void				set_moves(t_map **map);
 void				check_double_and_pos(t_room *room, t_room *begin);
 void				chained_list_set(t_room **room, t_map **map);
@@ -78,7 +79,10 @@ void				display_map(t_list *line);
 void				get_line(t_map **map, char *line);
 void				del_last_line(t_list *line);
 int					check_path(t_map **map);
+int					nbr_of_node(t_list *node);
 t_room				*init_room(void);
+t_room				*set_first_on_ptr(t_room *first, char *array);
+t_room				*set_second_on_ptr(t_room *second, char *array);
 t_tab				*init_tab(char *name, int left);
 t_node				*init_node(char *name);
 t_final				*init_final(char *name);

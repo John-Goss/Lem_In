@@ -6,28 +6,11 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 14:34:05 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/06/07 14:38:46 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/06/09 13:11:31 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-static int		end_passed(char *end_name, t_list *tab)
-{
-	t_list	*ptr;
-
-	ptr = tab;
-	while (ptr)
-	{
-		if (ft_strcmp(end_name, ((t_tab *)ptr->content)->name) == 0)
-		{
-			if (((t_tab *)ptr->content)->passed == 1)
-				return (1);
-		}
-		ptr = ptr->next;
-	}
-	return (0);
-}
 
 static t_list	*find_neighbor(t_list *room, t_room *top, t_list *tab)
 {
@@ -75,15 +58,11 @@ static t_list	*find_start(t_list *tab)
 			ptr = ptr->next;
 			continue ;
 		}
-		if (!ret)
+		ret == NULL ? ret = ptr : (0);
+		if (nbr < ((t_tab *)ret->content)->left)
 			ret = ptr;
-		else
-			if (nbr < ((t_tab *)ret->content)->left)
-				ret = ptr;
 		ptr = ptr->next;
 	}
-	if (!ret)
-		return (NULL);
 	return (ret);
 }
 

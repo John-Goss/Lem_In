@@ -6,25 +6,19 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 17:07:54 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/06/08 18:19:01 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/06/09 11:51:33 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static int	nbr_of_node(t_list *node)
+static int	pushfront_path(t_list **node, t_list **path, t_map **map)
 {
-	t_list	*tmp;
-	int		i;
-
-	i = 0;
-	tmp = node;
-	while (tmp)
-	{
-		i++;
-		tmp = tmp->next;
-	}
-	return (i);
+	while (ft_strcmp(((t_node *)(*node)->content)->name, (*map)->end->name)
+			!= 0)
+		(*node) = (*node)->next;
+	ft_lstpushfront(path, (*map)->end->name, sizeof((*map)->end->name));
+	return (1);
 }
 
 static void	parse_path(t_map **map)
@@ -38,18 +32,11 @@ static void	parse_path(t_map **map)
 	i = 1;
 	ptr = NULL;
 	path = NULL;
-	first = nbr_of_node((*map)->node);
-	while (first != 0)
+	first = (nbr_of_node((*map)->node)) + 1;
+	while (--first != 0 && (node = (*map)->node))
 	{
-		node = (*map)->node;
-		if (i)
-		{
-			while (ft_strcmp(((t_node *)node->content)->name, (*map)->end->name)
-					!= 0)
-				node = node->next;
-			ft_lstpushfront(&path, (*map)->end->name, sizeof((*map)->end->name));
+		if (i && (pushfront_path(&node, &path, map) == 1))
 			i = 0;
-		}
 		else
 		{
 			while (ft_strcmp(((t_node *)node->content)->name, ptr) != 0)
@@ -59,7 +46,6 @@ static void	parse_path(t_map **map)
 		if (((t_node *)node->content)->prev == NULL)
 			break ;
 		ptr = ft_strdup(((t_node *)node->content)->prev);
-		first--;
 	}
 	(*map)->path = path;
 }

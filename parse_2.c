@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 12:47:35 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/06/08 18:48:49 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/06/09 12:31:58 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,19 +58,16 @@ static void	set_2nd_room_neighbor(t_room **top, char **array)
 	tmp->nbr_neigh++;
 }
 
-static void	set_room_link(t_room **top, char **array)
+static void	set_room_link(t_room **top, char **array,
+		t_room *first, t_room *second)
 {
-	t_room		*first;
-	t_room		*second;
 	t_list		*new;
 
 	first = *top;
 	second = *top;
 	new = NULL;
-	while (ft_strcmp(first->name, array[0]) != 0 && first)
-		first = first->next;
-	while (ft_strcmp(second->name, array[1]) != 0 && second)
-		second = second->next;
+	first = set_first_on_ptr(first, array[0]);
+	second = set_second_on_ptr(second, array[1]);
 	if (!check_neighbors(first, array[1]))
 		return ;
 	if (ft_strcmp(first->name, array[0]) == 0 &&
@@ -114,14 +111,18 @@ void		chained_list_set(t_room **room, t_map **map)
 int			get_room_link(t_map **map, char *line)
 {
 	int			i;
+	t_room		*first;
+	t_room		*second;
 	char		**array;
 
 	i = 0;
+	first = NULL;
+	second = NULL;
 	array = ft_strsplit(line, '-');
 	while (array[i])
 		i++;
 	if (i != 2 || !check_exist_room(array[0], array[1], (*map)->top))
 		return (0);
-	set_room_link(&(*map)->top, array);
+	set_room_link(&(*map)->top, array, first, second);
 	return (1);
 }
