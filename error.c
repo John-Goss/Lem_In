@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 18:01:24 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/05/16 16:19:52 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/06/09 15:57:59 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void	ft_error(char *str)
 {
-	ft_putendl_fd(str, 2);
+	if (g_opt_v == 1)
+		ft_putendl_fd(str, 2);
+	else
+		ft_putendl_fd("ERROR", 2);
 	exit(1);
 }

@@ -6,15 +6,21 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/03 19:10:23 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/06/09 13:12:40 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/06/09 16:32:18 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEM_IN_H
 # define LEM_IN_H
 
-# include <libft.h>
+# include "libft.h"
 # include <errno.h>
+
+# define RED "\x1b[31m"
+# define GREEN "\033[32m"
+# define YELLOW "\033[1;33m"
+# define BLUE "\033[1;34m"
+# define RST "\x1b[0m"
 
 typedef struct		s_tab
 {
@@ -63,10 +69,17 @@ typedef struct		s_map
 	int				rooms;
 }					t_map;
 
+int	g_op_count;
+int	g_opt_v;
+int	g_opt_c;
+int	g_opt_h;
+
 void				ft_error(char *str);
 void				ft_parse(t_map **map);
 t_map				*init_map(void);
 void				free_array(char **array);
+void				display_help(void);
+int					parse_opt(int ac, char **argv);
 int					get_room_link(t_map **map, char *line);
 int					find_path(t_map **map);
 int					path_finding(t_map **map);

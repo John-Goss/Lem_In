@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/07 14:44:57 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/06/09 14:34:50 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/06/09 16:35:13 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,14 @@ static void	moves_ope(t_map **map)
 		if ((ptr == (*map)->path_end || ((t_final *)ptr->content)->ant == 0) &&
 				((t_final *)prev->content)->ant > 0)
 		{
-			ft_printf("L%d-%s ", ((t_final *)prev->content)->ant,
+			if (g_opt_c == 1 && isatty(STDOUT_FILENO))
+			{
+				ft_printf("L%s%d%s-%s%s%s ", GREEN,
+						((t_final *)prev->content)->ant, RST, YELLOW,
+						((t_final *)ptr->content)->name, RST);
+			}
+			else
+				ft_printf("L%d-%s ", ((t_final *)prev->content)->ant,
 					((t_final *)ptr->content)->name);
 			((t_final *)ptr->content)->ant = ((t_final *)prev->content)->ant;
 			((t_final *)prev->content)->ant = 0;
@@ -71,4 +78,11 @@ void		set_moves(t_map **map)
 		nbr++;
 	}
 	ft_putchar('\n');
+	if (g_op_count == 1)
+	{
+		if (g_opt_c == 1 && isatty(STDOUT_FILENO))
+			ft_printf("\n%sNumber of Stroke : %d%s\n", BLUE, (nbr - 1), RST);
+		else
+			ft_printf("\nNumber of Stroke : %d\n", (nbr - 1));
+	}
 }
