@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 13:10:56 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/06/09 16:24:50 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/06/10 12:14:16 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,8 @@ void	del_last_line(t_list *line)
 	t_list	*tmp;
 
 	tmp = line;
-	while (tmp->next->next)
-	{
+	while (tmp && tmp->next && tmp->next->next)
 		tmp = tmp->next;
-	}
 	free(tmp->next);
 	tmp->next = NULL;
 }
